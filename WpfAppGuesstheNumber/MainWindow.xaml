@@ -15,11 +15,31 @@
         </Grid.RowDefinitions>
         <Label Grid.Row="0"
                x:Name="GameName"
-               Content="{Binding Game}"
+               Content="Guess the number"
                HorizontalAlignment="Center"
                VerticalAlignment="Center"
                FontSize="26"
                Foreground="DarkBlue">
         </Label>
+
+        <TextBox Grid.Row="1"
+               x:Name="Number"
+               Text="Your number"
+               HorizontalAlignment="Center"
+               VerticalAlignment="Center"
+               FontSize="26"
+               Foreground="DarkBlue"
+               Background="Transparent"
+                BorderThickness="0" KeyUp="Number_KeyUp">
+            
+        </TextBox>
+        <Button Grid.Row="2"
+               HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
+                x:Name="Guess"
+               Content="Start Game"
+               FontSize="26"
+               Foreground="DarkBlue" Click="Guess_Click">
+        </Button>
     </Grid>
 </Window>

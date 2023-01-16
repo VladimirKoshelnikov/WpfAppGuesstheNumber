@@ -20,12 +20,67 @@ namespace WpfAppGuesstheNumber
     /// </summary>
     public partial class MainWindow : Window
     {
-        public string Game = "Hello";
+        private int _num = 0;
+        private bool isGameStarted = false;
+        private bool isNumberBiggger = false;
+        private bool isNumberSmalller = false;
 
         public MainWindow()
         {
+
             InitializeComponent();
-            
+            Number.Text = "Your number";
+        }
+
+        private void Guess_Click(object sender, RoutedEventArgs e)
+        {
+            if (!isGameStarted)
+            {
+                Random random = new Random();
+                _num = random.Next(100);
+
+                isGameStarted = true;
+                Guess.Content = "Guess";
+
+                Number.Text = "0";
+            }
+            else
+            {
+                CheckNumber();
+            }
+        }
+
+        private void CheckNumber()
+        {
+            int yourNumber = 0;
+            if (int.TryParse(Number.Text, out yourNumber))
+            {
+                isNumberBiggger = yourNumber > _num;
+                isNumberSmalller = yourNumber < _num;
+
+                if (isNumberBiggger == false & isNumberSmalller == false)
+                {
+                    GameName.Content = "You win";
+                    Guess.IsEnabled = false;
+                    Number.IsEnabled = false;
+                }
+                if (isNumberBiggger)
+                {
+                    GameName.Content = "You number is bigger";
+                }
+                if (isNumberSmalller)
+                {
+                    GameName.Content = "You number is smaller";
+                }
+            }
+        }
+
+        private void Number_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                CheckNumber();
+            }
         }
     }
 }
